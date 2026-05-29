@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blue
+  name: blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blue
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: blue
+    spec:
+      containers:
+      - image: hashicorp/http-echo
+        name: http-echo
+        args: ["-text=hello this is blue version", "-listen=:5000"] # Passes the "hello" message and listen port as arguments
+        ports:
+        - containerPort: 5000
+        resources: {}
+status: {}
